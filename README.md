@@ -1,6 +1,6 @@
 # The Women's Healing Circle
 
-Recovered and rebuilt from the supplied production `dist` bundle, then connected to the live cPanel API at `https://whcfoundation.com.ng/api`.
+Recovered and rebuilt from the supplied production `dist` bundle, connected to the live cPanel API, and configured with the organization’s donation bank-transfer details.
 
 ## Local development
 
@@ -20,11 +20,7 @@ The project is a Vite + React app with React Router. `vercel.json` rewrites all 
 
 ## Live API integration
 
-The frontend reads the API base from `VITE_API_BASE_URL`; if it is not set, it defaults to:
-
-```text
-https://whcfoundation.com.ng/api
-```
+The frontend reads the API base from `VITE_API_BASE_URL`; if it is not set, it defaults to `https://whcfoundation.com.ng/api`.
 
 Connected endpoints:
 
@@ -35,7 +31,13 @@ Connected endpoints:
 - `POST /contact.php` — contact form submissions
 - `POST /inquiries/submit.php` — volunteer, circle, and support inquiries
 
-The site keeps local fallback content for public sections if the API is temporarily unavailable.
+## Donations
+
+Donation details are stored in `src/config.js` and displayed in the homepage donation area, Support & Safety page, and Get Involved page. Visitors can copy the account number directly.
+
+- Account name: `WOMANHOOD HEALING CIRCLE INITIATIVE`
+- Bank: `Wema Bank`
+- Account number: `0128165265`
 
 ## Vercel
 
@@ -44,5 +46,3 @@ The site keeps local fallback content for public sections if the API is temporar
 - Output directory: `dist`
 - Install command: `npm install`
 - Root directory: `/`
-
-The API already exposes CORS headers for browser requests. If the API domain changes, add `VITE_API_BASE_URL` in Vercel Project Settings → Environment Variables.
