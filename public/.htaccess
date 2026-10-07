@@ -1,5 +1,33 @@
-Options -MultiViews
+# Use this file in the legacy PHP hosting document root.
+# Vercel does not execute .htaccess; this protects the old Apache/LiteSpeed host.
+
+# Prevent every "Index of /" directory listing.
+Options -Indexes -MultiViews
+
 RewriteEngine On
+
+# Never expose hidden files, source/config folders, or deployment metadata.
+RewriteRule (^|/)\.(?!well-known(?:/|$)) - [F,L,NC]
+RewriteRule ^(?:config|helpers|middleware|models|vendor|storage|includes)(?:/|$) - [F,L,NC]
+
+<FilesMatch "^(?:\.env(?:\..*)?|.*\.(?:bak|conf|config|dist|ini|log|old|save|sql|sqlite|swp|tmp)|(?:composer|package(?:-lock)?|vite\.config|tsconfig).*)$">
+  Require all denied
+</FilesMatch>
+
+# Do not allow source code or server configuration files to be downloaded.
+RewriteRule \.(?:env|ini|log|sql|sqlite|bak|old|save|swp|tmp|map|jsx|tsx|ts)$ - [F,L,NC]
+RewriteRule ^(?:api|server|config)[^/]*\.(?:js|json|php|ts|tsx)$ - [F,L,NC]
+
+# Keep the existing PHP API and uploaded media on this host.
+# Directory indexes remain disabled, so /api/ and /uploads/ cannot be browsed.
+RewriteRule ^(?:api|uploads)(?:/|$) - [L,NC]
+
+# Send the old frontend/document-root traffic to the Vercel deployment.
+# 302 is intentional while testing; change to 301 after confirming the result.
+RewriteCond %{HTTP_HOST} !^whcfoundation-react\.vercel\.app$ [NC]
+RewriteRule ^ https://whcfoundation-react.vercel.app%{REQUEST_URI} [R=302,L,NE]
+
+# React Router fallback if this file is ever served from Apache instead of redirected.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [QSA,L]
