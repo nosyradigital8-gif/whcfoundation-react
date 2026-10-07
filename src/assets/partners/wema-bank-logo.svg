@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 120" role="img" aria-labelledby="title desc">
+  <title>WEMA Bank</title><desc>Partner brand: WEMA Bank</desc>
+  <rect x="8" y="8" width="104" height="104" rx="18" fill="#a5007d"/>
+  <text x="60" y="72" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="34" font-weight="800" fill="#ffffff">W</text>
+  <text x="132" y="58" font-family="Arial,Helvetica,sans-serif" font-size="27" font-weight="800" letter-spacing="1" fill="#33262e">WEMA</text>
+  <text x="132" y="86" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="600" letter-spacing="2" fill="#70636b">Bank</text>
+</svg>
