@@ -1,6 +1,6 @@
 # The Women's Healing Circle
 
-Recovered and rebuilt from the supplied production `dist` bundle.
+Recovered and rebuilt from the supplied production `dist` bundle, then connected to the live cPanel API at `https://whcfoundation.com.ng/api`.
 
 ## Local development
 
@@ -18,6 +18,31 @@ npm run preview
 
 The project is a Vite + React app with React Router. `vercel.json` rewrites all routes to `index.html` so direct links work on Vercel.
 
-## Important recovery note
+## Live API integration
 
-The original production bundle referenced backend-powered content/forms, but the supplied archive did not include that backend or source maps. The rebuilt app preserves the public pages, copy, navigation, assets and styling, and includes static fallback content plus front-end form states. Connect the forms to the original provider or a new form endpoint before relying on submissions in production.
+The frontend reads the API base from `VITE_API_BASE_URL`; if it is not set, it defaults to:
+
+```text
+https://whcfoundation.com.ng/api
+```
+
+Connected endpoints:
+
+- `GET /public/home.php` — live homepage statistics
+- `GET /public/blog.php` — published blog listing
+- `GET /public/blog_post.php?slug=...` — blog detail pages
+- `GET /gallery/public_list.php` — live gallery images
+- `POST /contact.php` — contact form submissions
+- `POST /inquiries/submit.php` — volunteer, circle, and support inquiries
+
+The site keeps local fallback content for public sections if the API is temporarily unavailable.
+
+## Vercel
+
+- Framework preset: **Vite**
+- Build command: `npm run build`
+- Output directory: `dist`
+- Install command: `npm install`
+- Root directory: `/`
+
+The API already exposes CORS headers for browser requests. If the API domain changes, add `VITE_API_BASE_URL` in Vercel Project Settings → Environment Variables.
