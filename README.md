@@ -18,6 +18,12 @@ npm run preview
 
 The project is a Vite + React app with React Router. `vercel.json` rewrites all routes to `index.html` so direct links work on Vercel.
 
+## Recovery notes
+
+The source was reconstructed from the production bundle served at `https://whcfoundation.com.ng/` and checked against the recovery deployment at `https://whcfoundation-react.vercel.app/`. The recovery deployment was serving an older, simplified bundle; the source in this repository contains the fuller production sections, routes, assets, API fallbacks, and forms. Deploy the current `main` branch with the Vercel settings below to publish the recovered implementation.
+
+The public contact and Instagram links now point to the live organization domain and profile rather than the placeholder recovery destinations.
+
 ## Live API integration
 
 The frontend reads the API base from `VITE_API_BASE_URL`; if it is not set, it defaults to `https://whcfoundation.com.ng/api`.
